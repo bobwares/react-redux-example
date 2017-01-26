@@ -23,7 +23,7 @@ class DataContainer extends Component {
                 <ResetButton
                     label="Reset"
                     onButtonClicked={() => this.props.resetButtonClicked(url)}
-                    />
+                />
             </div>
             <ItemsList/>
         </div>

@@ -1,19 +1,12 @@
-import {fetchItemsAction} from '../actions/fetchItemsAction'
-import {resetItemsAction} from '../actions/resetItemsAction'
-import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import './App.css';
-
-// Components
-import ItemList from '../components/ItemList';
+import { Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
+import DataContainer from './DataContainer';
 
 // material UI
-import FetchButton from '../components/FetchButton';
-import ResetButton from '../components/ResetButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
-import DatePicker from 'material-ui/DatePicker';
 import AppBar from 'material-ui/AppBar';
 
 
@@ -27,36 +20,37 @@ const muiTheme = getMuiTheme({
     },
 });
 const styles = {
+
     container: {
         textAlign: 'center',
         paddingTop: 0,
     },
 };
 
-const url = 'http://5826ed963900d612000138bd.mockapi.io/items';
+
+const Home = () => <h1>Welcome</h1>;
+
+const NotFound = () => (
+    <h1>404.. This page is not found!</h1>);
+
+const Nav = () => (
+    <div>
+        <Link onlyActiveOnIndex activeStyle={{color:'#53acff'}} to='/'>Home</Link>&nbsp;
+        <Link activeStyle={{color:'#53acff'}} to='/items'>Items</Link>&nbsp;
+        <Link activeStyle={{color:'#53acff'}} to='/about'>About</Link>
+    </div>
+);
+
+const Container = (props) => {
+    console.log('props',props);
+    return (
+        <div>
+            <Nav />
+            {props.children}
+        </div>);
+};
+
 class App extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleRequestClose = this.handleRequestClose.bind(this);
-        this.handleTouchTap = this.handleTouchTap.bind(this);
-
-        this.state = {
-            open: false,
-        };
-    }
-
-    handleRequestClose() {
-        this.setState({
-            open: false,
-        });
-    }
-
-    handleTouchTap() {
-        this.setState({
-            open: true,
-        });
-    }
 
     render() {
     return (
@@ -68,33 +62,20 @@ class App extends Component {
             />
 
             <div>
-                <DatePicker hintText="Start Date" />
+                <Router history={hashHistory}>
+                    <Route path='/' component={Container}>
+                        <IndexRoute component={Home} />
+                        <Route path='/items' component={DataContainer}>
+                        </Route>
+                        <Route path='*' component={NotFound} />
+                    </Route>
+                </Router>
             </div>
-            <FetchButton
-                label="Fetch Items"
-                onButtonClicked={() => this.props.buttonClicked(url)}
-            />
-            <ResetButton
-                label="Reset"
-                onButtonClicked={() => this.props.resetButtonClicked(url)}
-            />
-            <div>
-                <ItemList/>
-            </div>
+
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {clicked:state.buttonReducer.clicked}
-};
-const mapDispatchToProps = (dispatch) => {
-    return {
-        buttonClicked: (...args) => dispatch(fetchItemsAction(...args)),
-        resetButtonClicked: (...args) => dispatch(resetItemsAction(...args))
-    };
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

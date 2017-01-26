@@ -5,7 +5,7 @@ const style = {
     margin: 12,
 };
 
-const RaisedButton = ({label, name, onButtonClicked}) => (
+const FetchButton = ({label, name, onButtonClicked}) => (
     <div>
         <RaisedButtonComponent
             onClick={onButtonClicked}
@@ -15,4 +15,4 @@ const RaisedButton = ({label, name, onButtonClicked}) => (
     </div>
 );
 
-export default RaisedButton;
+export default FetchButton;

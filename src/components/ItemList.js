@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../actions/items';
+
 class ItemList extends Component {
-    componentDidMount() {
-        this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-    }
+    // componentDidMount() {
+    //     this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
+    // }
     render() {
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
@@ -30,9 +30,9 @@ const mapStateToProps = (state) => {
         isLoading: state.itemsIsLoading
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         fetchData: (url) => dispatch(itemsFetchData(url))
+//     };
+// };
+export default connect(mapStateToProps)(ItemList);

@@ -17,8 +17,7 @@ export function itemsFetchDataSuccess(items) {
     };
 }
 
-
-export function itemsFetchData(url) {
+export function fetchItemsAction(url) {
     return (dispatch) => {
         dispatch(itemsIsLoading(true));
         fetch(url)

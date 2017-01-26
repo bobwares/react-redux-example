@@ -1,4 +1,4 @@
-import buttonClickedAction from '../actions'
+import {fetchItemsAction} from '../actions/fetchItemsAction'
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import './App.css';
@@ -7,7 +7,7 @@ import './App.css';
 import ItemList from '../components/ItemList';
 
 // material UI
-import RaisedButton from '../components/RaisedButton';
+import FetchButton from '../components/FetchButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
@@ -30,6 +30,8 @@ const styles = {
         paddingTop: 0,
     },
 };
+
+const url = 'http://5826ed963900d612000138bd.mockapi.io/items';
 class App extends Component {
     constructor(props, context) {
         super(props, context);
@@ -68,10 +70,9 @@ class App extends Component {
             <div>
                 <DatePicker hintText="Start Date" />
             </div>
-            <RaisedButton
-                name="START"
-                label="Start"
-                onButtonClicked={() => this.props.buttonClicked("START")}
+            <FetchButton
+                label="Fetch Items"
+                onButtonClicked={() => this.props.buttonClicked(url)}
             />
         </div>
       </MuiThemeProvider>
@@ -84,7 +85,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        buttonClicked: (...args) => dispatch(buttonClickedAction(...args))
+        buttonClicked: (...args) => dispatch(fetchItemsAction(...args))
     };
 }
 

@@ -11,6 +11,7 @@
     "react-test-renderer": "^15.4.2"
   },
   "dependencies": {
+    "material-ui": "^0.16.7",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",

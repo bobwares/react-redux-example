@@ -5,14 +5,14 @@ const style = {
     margin: 12,
 };
 
-const FetchButton = ({label, name, onButtonClicked}) => (
+const ResetButton = ({label, name, onButtonClicked}) => (
     <div>
         <RaisedButtonComponent
             onClick={onButtonClicked}
             label={label}
-            primary={true}
+            primary={false}
             style={style} />
     </div>
 );
 
-export default FetchButton;
+export default ResetButton;

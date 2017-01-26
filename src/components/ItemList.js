@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class ItemList extends Component {
-    // componentDidMount() {
-    //     this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-    // }
+
     render() {
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
@@ -12,6 +10,7 @@ class ItemList extends Component {
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
+
         return (
             <ul>
                 {this.props.items.map((item) => (

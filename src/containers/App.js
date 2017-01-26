@@ -1,4 +1,5 @@
 import {fetchItemsAction} from '../actions/fetchItemsAction'
+import {resetItemsAction} from '../actions/resetItemsAction'
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import './App.css';
@@ -8,6 +9,7 @@ import ItemList from '../components/ItemList';
 
 // material UI
 import FetchButton from '../components/FetchButton';
+import ResetButton from '../components/ResetButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
@@ -64,9 +66,7 @@ class App extends Component {
                 title="Data Bus"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
-            <div>
-                <ItemList/>
-            </div>
+
             <div>
                 <DatePicker hintText="Start Date" />
             </div>
@@ -74,6 +74,13 @@ class App extends Component {
                 label="Fetch Items"
                 onButtonClicked={() => this.props.buttonClicked(url)}
             />
+            <ResetButton
+                label="Reset"
+                onButtonClicked={() => this.props.resetButtonClicked(url)}
+            />
+            <div>
+                <ItemList/>
+            </div>
         </div>
       </MuiThemeProvider>
     );
@@ -85,7 +92,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        buttonClicked: (...args) => dispatch(fetchItemsAction(...args))
+        buttonClicked: (...args) => dispatch(fetchItemsAction(...args)),
+        resetButtonClicked: (...args) => dispatch(resetItemsAction(...args))
     };
 }
 
